@@ -22,16 +22,18 @@ function App() {
                 <Route path="/technician" element={user && user.role === 'TECHNICIAN' ? <TechnicianDashboard /> : <Navigate to="/login" />} />
                 <Route path="/track-vehicle" element={user && user.role === 'CUSTOMER' ? <CustomerDashboard /> : <Navigate to="/track-login" />} />
 
-                <Route path="/" element={() => {
-                    if (!user) return <Navigate to="/login" />;
-                    if (user.role === 'ADVISOR' || user.role === 'ADMIN') return <Navigate to="/advisor" />;
-                    if (user.role === 'TECHNICIAN') return <Navigate to="/technician" />;
-                    if (user.role === 'CUSTOMER') return <Navigate to="/track-vehicle" />;
-                    return <Navigate to="/login" />;
-                }} />
+                <Route path="/" element={<HomeRedirect user={user} />} />
             </Routes>
         </Router>
     );
+}
+
+function HomeRedirect({ user }) {
+    if (!user) return <Navigate to="/login" />;
+    if (user.role === 'ADVISOR' || user.role === 'ADMIN') return <Navigate to="/advisor" />;
+    if (user.role === 'TECHNICIAN') return <Navigate to="/technician" />;
+    if (user.role === 'CUSTOMER') return <Navigate to="/track-vehicle" />;
+    return <Navigate to="/login" />;
 }
 
 export default App;
