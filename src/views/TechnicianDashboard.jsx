@@ -28,7 +28,7 @@ export default function TechnicianDashboard() {
 
     const fetchJobCards = async () => {
         try {
-            const res = await api.get('/job-cards');
+            const res = await api.get('job-cards');
             const sorted = res.data.sort((a, b) => {
                 if (a.status === 'COMPLETED') return 1;
                 if (b.status === 'COMPLETED') return -1;
@@ -40,14 +40,14 @@ export default function TechnicianDashboard() {
 
     const fetchInventory = async () => {
         try {
-            const res = await api.get('/inventory');
+            const res = await api.get('inventory');
             setInventory(res.data);
         } catch (e) { console.error(e); }
     };
 
     const updateStatus = async (id, status) => {
         try {
-            const res = await api.put(`/job-cards/${id}/status`, status, {
+            const res = await api.put(`job-cards/${id}/status`, status, {
                 headers: { 'Content-Type': 'text/plain' }
             });
             fetchJobCards();
@@ -71,7 +71,7 @@ export default function TechnicianDashboard() {
         }
 
         try {
-            const res = await api.post(`/job-cards/${selectedJob.id}/parts`, payload);
+            const res = await api.post(`job-cards/${selectedJob.id}/parts`, payload);
             if (res.status === 200) {
                 setPartData({ name: '', cost: '' });
                 setSelectedInventoryId('');
@@ -88,7 +88,7 @@ export default function TechnicianDashboard() {
     const addInventoryItem = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/inventory', newItem);
+            await api.post('inventory', newItem);
             setNewItem({ name: '', sku: '', quantity: 0, price: 0.0 });
             fetchInventory();
         } catch (e) { console.error(e); }

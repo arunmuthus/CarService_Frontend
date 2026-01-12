@@ -21,7 +21,7 @@ export default function AdvisorDashboard() {
         setActiveJob(null);
 
         try {
-            const res = await api.get(`/vehicles/search?plate=${searchQuery}`);
+            const res = await api.get(`vehicles/search?plate=${searchQuery}`);
             setVehicle(res.data);
             // Check for active job
             // We don't have a direct endpoint for "check status", but we can try creating a job and handle error,
@@ -56,7 +56,7 @@ export default function AdvisorDashboard() {
                 }
             };
 
-            const res = await api.post('/vehicles', payload);
+            const res = await api.post('vehicles', payload);
             setVehicle(res.data);
             setMode('VIEW_JOB');
         } catch (err) {
@@ -67,7 +67,7 @@ export default function AdvisorDashboard() {
     const handleCreateJob = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/job-cards', {
+            await api.post('job-cards', {
                 vehicleId: vehicle.id,
                 description: jobDesc
             });

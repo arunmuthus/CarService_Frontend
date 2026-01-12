@@ -13,7 +13,7 @@ export default function CustomerLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.post('/auth/customer-login', { licensePlate: plate, pin });
+            const res = await api.post('auth/customer-login', { licensePlate: plate, pin });
             login(res.data);
             navigate('/track-vehicle');
         } catch (err) {

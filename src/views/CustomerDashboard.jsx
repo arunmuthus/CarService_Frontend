@@ -20,7 +20,7 @@ export default function CustomerDashboard() {
             // For prototype, we'll fetch list and filter client side or correct backend.
             // Let's rely on filtered backend endpoint or assume get all returns all.
             // Better: GET /api/job-cards?vehicleId=...
-            const res = await api.get('/job-cards'); // Ideally constrained
+            const res = await api.get('job-cards'); // Ideally constrained
             const myJob = res.data.find(j => j.vehicle.id === user.vehicleId && (j.status !== 'DELIVERED'));
             // Showing active or recently completed job.
 

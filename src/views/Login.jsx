@@ -14,7 +14,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.post('/auth/login', { username, password });
+            const res = await api.post('auth/login', { username, password });
             login(res.data);
             if (res.data.role === 'ADVISOR' || res.data.role === 'ADMIN') navigate('/advisor');
             else if (res.data.role === 'TECHNICIAN') navigate('/technician');
@@ -46,6 +46,7 @@ export default function Login() {
                         <input
                             className="input"
                             type="password"
+                            autoComplete="current-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
